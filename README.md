@@ -45,6 +45,8 @@ const airly = new Airly('API_KEY');
 
 ## API
 
+> Check out the [`examples`](https://github.com/xxczaki/airly/tree/master/examples) folder :rocket:
+
 ### airly.idData(id)
 
 > Returns pollution data from the specified installation

@@ -1,0 +1,41 @@
+{
+	"name": "airly",
+	"version": "1.0.0",
+	"description": "Simple wrapper for Airly API",
+	"license": "MIT",
+	"repository": "xxczaki/airly",
+	"author": {
+		"name": "Antoni Kepinski",
+		"email": "a@kepinski.me",
+		"url": "https://kepinski.me"
+	},
+	"scripts": {
+		"test": "xo"
+	},
+	"files": [
+		"index.js"
+	],
+	"keywords": [
+		"airly",
+		"airly-api",
+		"api",
+		"pollution",
+		"air",
+		"smog",
+		"data",
+		"poland",
+		"powietrze",
+		"wrapper",
+		"simple",
+		"cloud",
+		"safe",
+		"PM10",
+		"npm"
+	],
+	"dependencies": {
+		"got": "^9.3.2"
+	},
+	"devDependencies": {
+		"xo": "*"
+	}
+}

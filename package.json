@@ -33,7 +33,8 @@
 		"npm"
 	],
 	"dependencies": {
-		"got": "^9.3.2"
+		"got": "^9.6.0",
+		"ow": "^0.12.0"
 	},
 	"devDependencies": {
 		"xo": "*"

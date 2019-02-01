@@ -9,10 +9,11 @@
 ## Highlights
 
 * Simple API
+* Uses async/await
 * Uses the 2.0 version of Airly API
-* Includes only the most useful operations
-* Only 1 dependency
-* Less than 50 lines of code
+* Actively maintained
+* Lightweight
+* Less than 100 lines of code
 
 ## Install
 
@@ -46,6 +47,25 @@ const airly = new Airly('API_KEY');
 ## API
 
 > Check out the [`examples`](https://github.com/xxczaki/airly/tree/master/examples) folder :rocket:
+
+### new Airly(key, language)
+
+> Constructor for other operations
+
+**key**
+
+Type: `string`
+
+Your Airly API key. You can obtain one [here](https://developer.airly.eu/).
+
+**language**
+
+Type: `string`
+Default: `en`
+
+Get air quality descriptions in specified language. Currently supported languages are English ('en' - default) and Polish ('pl').
+
+For more information check out [Airly's documentation](https://developer.airly.eu/docs#general.language)
 
 ### airly.idData(id)
 

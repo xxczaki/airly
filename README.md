@@ -6,7 +6,7 @@
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/xojs/xo) 
 [![Install size](https://packagephobia.now.sh/badge?p=airly)](https://packagephobia.now.sh/result?p=airly)
 
-> [**Czytaj po polsku**](https://github.com/xxczaki/airly/blob/master/README_PL.md)
+[**Czytaj po polsku :poland:**](https://github.com/xxczaki/airly/blob/master/README_PL.md)
 
 ## Highlights
 

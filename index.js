@@ -13,6 +13,7 @@ module.exports = class {
 		ow(key, ow.string);
 		ow(language, ow.optional.string.minLength(2).maxLength(2));
 
+		this.baseUrl = 'https://airapi.airly.eu/v2';
 		this.config = {
 			headers: {
 				apikey: key,
@@ -30,7 +31,7 @@ module.exports = class {
 		// Validate id
 		ow(id, ow.number);
 
-		const response = await got(`https://airapi.airly.eu/v2/measurements/installation?installationId=${id}`, this.config);
+		const response = await got(this.baseUrl + `/measurements/installation?installationId=${id}`, this.config);
 		return response.body;
 	}
 
@@ -42,7 +43,7 @@ module.exports = class {
 		// Validate id
 		ow(id, ow.number);
 
-		const response = await got(`https://airapi.airly.eu/v2/installations/${id}`, this.config);
+		const response = await got(this.baseUrl + `/installations/${id}`, this.config);
 		return response.body;
 	}
 
@@ -59,7 +60,7 @@ module.exports = class {
 		ow(lat, ow.number.is(x => x >= -90.0 && x <= 90.0));
 		ow(lng, ow.number.is(x => x >= -180.0 && x <= 180.0));
 
-		const search = await got(`https://airapi.airly.eu/v2/installations/nearest?lat=${lat}&lng=${lng}&maxResults=3&maxDistanceKM=-1`, this.config);
+		const search = await got(this.baseUrl + `/installations/nearest?lat=${lat}&lng=${lng}&maxResults=3&maxDistanceKM=-1`, this.config);
 		return search.body;
 	}
 };

@@ -1,6 +1,6 @@
 {
 	"name": "airly",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Simple wrapper for Airly API",
 	"license": "MIT",
 	"repository": "xxczaki/airly",

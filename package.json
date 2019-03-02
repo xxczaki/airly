@@ -1,6 +1,6 @@
 {
 	"name": "airly",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Simple wrapper for Airly API",
 	"license": "MIT",
 	"repository": "xxczaki/airly",
@@ -10,7 +10,7 @@
 		"url": "https://kepinski.me"
 	},
 	"scripts": {
-		"test": "xo"
+		"test": "xo && ava"
 	},
 	"files": [
 		"index.js"
@@ -30,6 +30,8 @@
 		"cloud",
 		"safe",
 		"PM10",
+		"PM25",
+		"PM1",
 		"npm"
 	],
 	"dependencies": {
@@ -37,6 +39,7 @@
 		"ow": "^0.12.0"
 	},
 	"devDependencies": {
+		"ava": "*",
 		"xo": "*"
 	}
 }

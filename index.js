@@ -9,7 +9,7 @@ module.exports = class {
 	* @param {string} language    Language - Get air quality descriptions in specified language. Currently supported languages are English ('en' - default) and Polish ('pl')
 	*/
 	constructor(key, language) {
-		// Validate key & the language
+		// Validate key & language
 		ow(key, ow.string);
 		ow(language, ow.optional.string.minLength(2).maxLength(2));
 

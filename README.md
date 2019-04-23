@@ -16,6 +16,7 @@
 * Actively maintained
 * Lightweight
 * Less than 100 lines of code
+* Written in TypeScript
 
 ## Install
 

@@ -16,6 +16,7 @@
 * Aktywnie wspierana
 * Lekka
 * Mniej niż 100 linijek kodu
+* Napisana w Języku TypeScript
 
 ## Instalacja
 

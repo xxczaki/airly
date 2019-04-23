@@ -6,7 +6,7 @@ const airly = new Airly('API_KEY');
 (async () => {
 	try {
 		// Get data from installation number 240
-		const data = await airly.idData(240);
+		const data = await airly.idData(245);
 
 		// Filter to only get info about current PM1, PM2.5 and PM1O values
 		const info = data.current.values.filter(item => (

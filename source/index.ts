@@ -6,7 +6,7 @@ import ow from 'ow';
 interface AirlyConfig {
 	headers: {
 		apikey: string;
-		'Accept-Language': string;
+		'Accept-Language'?: 'en' | 'pl';
 	};
 	json: boolean;
 }
@@ -20,16 +20,15 @@ class Airly {
 
 	public readonly config: AirlyConfig
 
-	constructor(public key: string, public language? : string) {
+	constructor(public key: string, public language?: 'en' | 'pl') {
 		// Validate key & language
 		ow(key, ow.string);
-		ow(language, ow.optional.string.minLength(2).maxLength(2));
 
 		this.baseUrl = 'https://airapi.airly.eu/v2';
 		this.config = {
 			headers: {
 				apikey: key,
-				'Accept-Language': language = 'Accept-Language'
+				'Accept-Language': language
 			},
 			json: true
 		};
@@ -40,9 +39,6 @@ class Airly {
 	* @returns {Promise<object[]>} Data from the installation
 	*/
 	async idData(id: number): Promise<string> {
-		// Validate id
-		ow(id, ow.number);
-
 		const response = await got(`${this.baseUrl}/measurements/installation?installationId=${id}`, this.config);
 		return response.body;
 	}
@@ -52,9 +48,6 @@ class Airly {
 	* @returns {Promise<object[]>} Info about installation
 	*/
 	async idInfo(id: number): Promise<string> {
-		// Validate id
-		ow(id, ow.number);
-
 		const response = await got(`${this.baseUrl}/installations/${id}`, this.config);
 		return response.body;
 	}
@@ -62,9 +55,11 @@ class Airly {
 	/**
 	* @param {number} lat  	Latitude - Geographical coordinate
 	* @param {number} lng   Longitude - Geographical coordinate
+	* @param {number} maxDistanceKM  All the returned installations must be located within this limit from the given point (in km); negative value means no limit (default: 3)
+	* @param {number} maxResults   Maximum number of installations to return; negative value means no limit (default: -1)
 	* @returns {Promise<object[]>} Info about 3 nearest installations
 	*/
-	async nearestInstallations(lat: number, lng: number): Promise<string> {
+	async nearestInstallations(lat: number, lng: number, maxDistanceKM?: number, maxResults?: number): Promise<string> {
 		/*
 		Validate latitude & longitude
 		See https://developer.airly.eu/docs#general.coordinates
@@ -72,8 +67,43 @@ class Airly {
 		ow(lat, ow.number.is(x => x >= -90.0 && x <= 90.0));
 		ow(lng, ow.number.is(x => x >= -180.0 && x <= 180.0));
 
-		const search = await got(`${this.baseUrl}/installations/nearest?lat=${lat}&lng=${lng}&maxResults=3&maxDistanceKM=-1`, this.config);
-		return search.body;
+		const response = await got(`${this.baseUrl}/installations/nearest?lat=${lat}&lng=${lng}&maxDistanceKM=${maxDistanceKM || 3}&maxResults=${maxResults || -1}`, this.config);
+		return response.body;
+	}
+
+	/**
+	* @param {number} lat  	Latitude - Geographical coordinate
+	* @param {number} lng   Longitude - Geographical coordinate
+	* @param {number} maxDistanceKM  All the returned installations must be located within this limit from the given point (in km); negative value means no limit (default: 3)
+	* @returns {Promise<object[]>} Returns measurements for an installation closest to a given location.
+	*/
+	async nearestIdMeasurements(lat: number, lng: number, maxDistanceKM?: number): Promise<string> {
+		/*
+		Validate latitude & longitude
+		See https://developer.airly.eu/docs#general.coordinates
+		*/
+		ow(lat, ow.number.is(x => x >= -90.0 && x <= 90.0));
+		ow(lng, ow.number.is(x => x >= -180.0 && x <= 180.0));
+
+		const response = await got(`${this.baseUrl}/measurements/nearest?lat=${lat}&lng=${lng}&maxDistanceKM=${maxDistanceKM || 3}`, this.config);
+		return response.body;
+	}
+
+	/**
+	* @param {number} lat  	Latitude - Geographical coordinate
+	* @param {number} lng   Longitude - Geographical coordinate
+	* @returns {Promise<object[]>} Returns measurements for any geographical location. Measurement values are interpolated by averaging measurements from nearby sensors (up to 1,5km away from the given point).
+	*/
+	async nearestAverageMeasurements(lat: number, lng: number): Promise<string> {
+		/*
+		Validate latitude & longitude
+		See https://developer.airly.eu/docs#general.coordinates
+		*/
+		ow(lat, ow.number.is(x => x >= -90.0 && x <= 90.0));
+		ow(lng, ow.number.is(x => x >= -180.0 && x <= 180.0));
+
+		const response = await got(`${this.baseUrl}/measurements/point?lat=${lat}&lng=${lng}`, this.config);
+		return response.body;
 	}
 }
 

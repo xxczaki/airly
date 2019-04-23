@@ -1,4 +1,4 @@
-const Airly = require('..');
+const Airly = require('../../dist');
 
 // Specify API key
 const airly = new Airly('API_KEY');

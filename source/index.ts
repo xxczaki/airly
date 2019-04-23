@@ -3,6 +3,14 @@
 import got from 'got';
 import ow from 'ow';
 
+interface AirlyConfig {
+	headers: {
+		apikey: string;
+		'Accept-Language': string;
+	};
+	json: boolean;
+}
+
 class Airly {
 	/**
 	* @param {string} key    API key - Special access key from Airly
@@ -10,7 +18,7 @@ class Airly {
 	*/
 	public readonly baseUrl: string
 
-	public readonly config: object
+	public readonly config: AirlyConfig
 
 	constructor(public key: string, public language? : string) {
 		// Validate key & language
@@ -21,7 +29,7 @@ class Airly {
 		this.config = {
 			headers: {
 				apikey: key,
-				'Accept-Language': language
+				'Accept-Language': language = 'Accept-Language'
 			},
 			json: true
 		};

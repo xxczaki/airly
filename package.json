@@ -1,6 +1,6 @@
 {
 	"name": "airly",
-	"version": "1.2.1",
+	"version": "1.2.2",
 	"description": "Simple wrapper for Airly API",
 	"license": "MIT",
 	"repository": "xxczaki/airly",
@@ -18,9 +18,6 @@
 	"engines": {
 		"node": ">=8"
 	},
-	"files": [
-		"index.js"
-	],
 	"keywords": [
 		"airly",
 		"airly-api",

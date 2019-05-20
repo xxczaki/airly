@@ -64,6 +64,7 @@ Twój klucz dostępu do API. Możesz go wygenerować [tutaj](https://developer.a
 **language**
 
 Typ: `string`
+
 Domyślnie: `en`
 
 Otrzymuj opisy zanieczyszczenia w wybranym języku. Obecnie wspierane języki to Angielski ('en' - domyślnie) i Polski ('pl').
@@ -109,6 +110,7 @@ Długość geograficzna
 **maxDistanceKM**
 
 Typ: `number`
+
 Domyślnie: 3
 
 Wszystkie instalacje muszą znajdować się w tej odległości od podanego punktu (w km); liczba ujemna oznacza brak limitu.
@@ -116,6 +118,7 @@ Wszystkie instalacje muszą znajdować się w tej odległości od podanego punkt
 **maxResults**
 
 Typ: `number`
+
 Domyślnie: -1
 
 Maksymalna liczba zwróconych instalacji; liczba ujemna oznacza brak limitu.
@@ -139,6 +142,7 @@ Długość geograficzna
 **maxDistanceKM**
 
 Typ: `number`
+
 Domyślnie: 3
 
 Wszystkie instalacje muszą znajdować się w tej odległości od podanego punktu (w km); liczba ujemna oznacza brak limitu.

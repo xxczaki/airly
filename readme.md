@@ -64,6 +64,7 @@ Your Airly API key. You can obtain one [here](https://developer.airly.eu/).
 **language**
 
 Type: `string`
+
 Default: `en`
 
 Get air quality descriptions in specified language. Currently supported languages are English ('en' - default) and Polish ('pl').
@@ -107,6 +108,7 @@ Type: `number`
 **maxDistanceKM**
 
 Type: `number`
+
 Default: 3
 
 All the returned installations must be located within this limit from the given point (in km); negative value means no limit.
@@ -114,6 +116,7 @@ All the returned installations must be located within this limit from the given 
 **maxResults**
 
 Type: `number`
+
 Default: -1
 
 Maximum number of installations to return; negative value means no limit.
@@ -137,6 +140,7 @@ Longitude
 **maxDistanceKM**
 
 Type: `number`
+
 Default: 3
 
 All the returned installations must be located within this limit from the given point (in km); negative value means no limit.

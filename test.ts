@@ -1,5 +1,5 @@
 import test from 'ava';
-import Airly from '../source';
+import Airly from './dist';
 
 const airly = new Airly('API_KEY');
 

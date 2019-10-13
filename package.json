@@ -1,7 +1,7 @@
 {
 	"name": "airly",
-	"version": "1.3.0",
-	"description": "Simple wrapper for Airly API",
+	"version": "2.0.0",
+	"description": "Simple wrapper for Airly API, works in Node.js & the browser.",
 	"main": "dist/index.js",
 	"module": "dist/index.esm.js",
 	"types": "dist/index.d.ts",
@@ -22,11 +22,11 @@
 		"esm": "tsc --module esnext && cpy dist/index.js dist --rename index.esm.js",
 		"cjs": "tsc --module commonjs",
 		"build": "npm run esm && npm run cjs",
-		"test": "npm run build && xo && ava",
+		"test": "xo",
 		"prepublishOnly": "npm run build"
 	},
 	"engines": {
-		"node": ">=8"
+		"node": ">=10"
 	},
 	"keywords": [
 		"airly",
@@ -48,32 +48,20 @@
 		"npm"
 	],
 	"dependencies": {
-		"got": "^9.6.0"
+		"node-fetch": "^2.6.0"
 	},
 	"devDependencies": {
 		"@akepinski/tsconfig": "0.0.2",
-		"@types/got": "^9.6.5",
-		"@typescript-eslint/eslint-plugin": "^1.13.0",
-		"@typescript-eslint/parser": "^1.13.0",
-		"ava": "*",
+		"@types/node-fetch": "^2.5.2",
+		"@typescript-eslint/eslint-plugin": "^2.3.3",
+		"@typescript-eslint/parser": "^2.3.3",
 		"cpy-cli": "^2.0.0",
-		"del-cli": "^2.0.0",
-		"eslint-config-xo-typescript": "^0.15.0",
-		"ts-node": "^8.3.0",
-		"typescript": "^3.5.3",
+		"del-cli": "^3.0.0",
+		"eslint-config-xo-typescript": "^0.19.0",
+		"typescript": "^3.6.4",
 		"xo": "*"
 	},
 	"sideEffects": false,
-	"ava": {
-		"babel": false,
-		"compileEnhancements": false,
-		"extensions": [
-			"ts"
-		],
-		"require": [
-			"ts-node/register"
-		]
-	},
 	"xo": {
 		"extends": "xo-typescript",
 		"extensions": [
@@ -83,7 +71,8 @@
 			"ava/no-ignored-test-files": "off"
 		},
 		"ignores": [
-			"examples"
+			"examples",
+			"test.ts"
 		]
 	}
 }

@@ -5,8 +5,8 @@ const airly = new Airly('API_KEY');
 
 (async () => {
 	try {
-		// Get info about the installation number 240
-		const data = await airly.idInfo(240);
+		// Get info about the installation number 245
+		const data = await airly.idInfo(245);
 
 		// Use the obtained data to fill this sentence
 		console.log(`This installation is located at ${data.address.street} Street in ${data.address.city}!`);

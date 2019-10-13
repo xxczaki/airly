@@ -1,13 +1,12 @@
 'use strict';
 
-import got from 'got';
+import fetch from 'node-fetch';
 
 interface AirlyConfig {
 	headers: {
 		apikey: string;
 		'Accept-Language'?: 'en' | 'pl';
 	};
-	json: boolean;
 }
 
 class Airly {
@@ -25,8 +24,7 @@ class Airly {
 			headers: {
 				apikey: key,
 				'Accept-Language': language
-			},
-			json: true
+			}
 		};
 	}
 
@@ -35,8 +33,9 @@ class Airly {
 	* @returns {Promise<object[]>} Data from the installation
 	*/
 	async idData(id: number): Promise<string> {
-		const response = await got(`${this.baseUrl}/measurements/installation?installationId=${id}`, this.config);
-		return response.body;
+		// @ts-ignore
+		const response = await fetch(`${this.baseUrl}/measurements/installation?installationId=${id}`, this.config).then((res: any) => res.json());
+		return response;
 	}
 
 	/**
@@ -44,8 +43,9 @@ class Airly {
 	* @returns {Promise<object[]>} Info about installation
 	*/
 	async idInfo(id: number): Promise<string> {
-		const response = await got(`${this.baseUrl}/installations/${id}`, this.config);
-		return response.body;
+		// @ts-ignore
+		const response = await fetch(`${this.baseUrl}/installations/${id}`, this.config).then((res: any) => res.json());
+		return response;
 	}
 
 	/**
@@ -55,9 +55,10 @@ class Airly {
 	* @param {number} [maxResults=-1] Maximum number of installations to return; negative value means no limit
 	* @returns {Promise<object[]>} Info about 3 nearest installations
 	*/
-	async nearestInstallations(lat: number, lng: number, maxDistanceKM?: number, maxResults?: number): Promise<string> {
-		const response = await got(`${this.baseUrl}/installations/nearest?lat=${lat}&lng=${lng}&maxDistanceKM=${maxDistanceKM || 3}&maxResults=${maxResults || -1}`, this.config);
-		return response.body;
+	async nearestInstallations(lat: number, lng: number, maxDistanceKM = 3, maxResults = -1): Promise<string> {
+		// @ts-ignore
+		const response = await fetch(`${this.baseUrl}/installations/nearest?lat=${lat}&lng=${lng}&maxDistanceKM=${maxDistanceKM}&maxResults=${maxResults}`, this.config).then((res: any) => res.json());
+		return response;
 	}
 
 	/**
@@ -66,9 +67,10 @@ class Airly {
 	* @param {number} [maxDistanceKM=3] All the returned installations must be located within this limit from the given point (in km); negative value means no limit
 	* @returns {Promise<object[]>} Measurements for an installation closest to a given location.
 	*/
-	async nearestIdMeasurements(lat: number, lng: number, maxDistanceKM?: number): Promise<string> {
-		const response = await got(`${this.baseUrl}/measurements/nearest?lat=${lat}&lng=${lng}&maxDistanceKM=${maxDistanceKM || 3}`, this.config);
-		return response.body;
+	async nearestIdMeasurements(lat: number, lng: number, maxDistanceKM = 3): Promise<string> {
+		// @ts-ignore
+		const response = await fetch(`${this.baseUrl}/measurements/nearest?lat=${lat}&lng=${lng}&maxDistanceKM=${maxDistanceKM}`, this.config).then((res: any) => res.json());
+		return response;
 	}
 
 	/**
@@ -77,8 +79,9 @@ class Airly {
 	* @returns {Promise<object[]>} Measurements for any geographical location. Measurement values are interpolated by averaging measurements from nearby sensors (up to 1,5km away from the given point).
 	*/
 	async nearestAverageMeasurements(lat: number, lng: number): Promise<string> {
-		const response = await got(`${this.baseUrl}/measurements/point?lat=${lat}&lng=${lng}`, this.config);
-		return response.body;
+		// @ts-ignore
+		const response = await fetch(`${this.baseUrl}/measurements/point?lat=${lat}&lng=${lng}`, this.config).then((res: any) => res.json());
+		return response;
 	}
 }
 

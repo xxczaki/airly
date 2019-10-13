@@ -11,7 +11,7 @@
 ## Highlights
 
 * Simple API
-* Uses async/await
+* Works in Node.js & the browser
 * Uses the 2.0 version of Airly API
 * Actively maintained
 * Lightweight

@@ -85,5 +85,4 @@ class Airly {
 	}
 }
 
-module.exports = Airly;
 export default Airly;

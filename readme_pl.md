@@ -10,7 +10,7 @@
 
 ## Cechy
 
-* Proste API
+* Proste, asynchroniczne API
 * Działa zarówno w środowisku Node.js, jak i w przeglądarce
 * Używa najnowszej wersji 2.0 API
 * Aktywnie wspierana

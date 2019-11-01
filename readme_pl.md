@@ -13,9 +13,9 @@
 * Proste, asynchroniczne API
 * Działa zarówno w środowisku Node.js, jak i w przeglądarce
 * Używa najnowszej wersji 2.0 API
+* Pełne pokrycie API
 * Aktywnie wspierana
 * Lekka
-* Jeden plik źródłowy (zawierający ~120 linijek kodu)
 * Napisana w Języku TypeScript
 
 ## Instalacja
@@ -38,7 +38,7 @@ const airly = new Airly('API_KEY');
 
 (async () => {
 	try {
-		const data = await airly.idInfo(240);
+		const data = await airly.installationInfo(240);
 		console.log(data);
 	} catch (error) {
 		console.log(error);
@@ -71,19 +71,9 @@ Otrzymuj opisy zanieczyszczenia w wybranym języku. Obecnie wspierane języki to
 
 Po więcej informacji zapoznaj się z [dokumentacją Airly](https://developer.airly.eu/docs#general.language)
 
-### airly.idData(id)
+### airly.installationMeasurements(id)
 
-> Pozwala na pozyskanie danych z określonej instalacji
-
-**id**
-
-Typ: `number`
-
-Unikalny numer instalacji
-
-### airly.idInfo(id)
-
-> Pozwala na pozyskanie informacji o określonej instalacji
+> Zwraca szczegółowe pomiary (obecne, historyczne i przewidywane) dla instalacji
 
 **id**
 
@@ -91,9 +81,19 @@ Typ: `number`
 
 Unikalny numer instalacji
 
-### airly.nearestInstallations(lat, lng)
+### airly.installationInfo(id)
 
-> Pozwala na pozyskanie informacji o 3 najbliższych instalacjach w okolicy (w tym również ich numerów ID)
+> Zwraca informacje na temat wskazanej instalacji
+
+**id**
+
+Typ: `number`
+
+Unikalny numer instalacji
+
+### airly.nearestInstallations(lat, lng, maxDistanceKM, maxResults)
+
+> Zwraca informacje na temat najbliższych instalacji (razem z ich numerami)
 
 **lat**
 
@@ -103,7 +103,7 @@ Szerokość geograficzna
 
 **lng**
 
-Typ: `number`
+Type: `number`
 
 Długość geograficzna
 
@@ -113,7 +113,7 @@ Typ: `number`
 
 Domyślnie: 3
 
-Wszystkie instalacje muszą znajdować się w tej odległości od podanego punktu (w km); liczba ujemna oznacza brak limitu.
+Wszystkie zwracane instalacje muszą znajdować się w danej odległości (w km) od wskazanego punktu; negatywna wartość oznacza brak limitu
 
 **maxResults**
 
@@ -121,11 +121,11 @@ Typ: `number`
 
 Domyślnie: -1
 
-Maksymalna liczba zwróconych instalacji; liczba ujemna oznacza brak limitu.
+Maksymalna liczba instalacji, która może zostać zwrócona; negatywna wartość oznacza brak limitu
 
-### airly.nearestIdMeasurements(lat, lng, maxDistanceKM)
+### airly.nearestMeasurements(lat, lng, maxDistanceKM)
 
-> Pozwala na uzyskanie pomiarów z najbliższej dla danej lokalizacji instalacji
+> Zwraca szczegółowe pomiary (obecne, historyczne i przewidywane) z instalacji, która jest najbliżej od podanego punktu
 
 **lat**
 
@@ -145,23 +145,31 @@ Typ: `number`
 
 Domyślnie: 3
 
-Wszystkie instalacje muszą znajdować się w tej odległości od podanego punktu (w km); liczba ujemna oznacza brak limitu.
+Wszystkie zwracane instalacje muszą znajdować się w danej odległości (w km) od wskazanego punktu; negatywna wartość oznacza brak limitu
 
-### airly.nearestAverageMeasurements(lat, lng)
+### airly.pointMeasurements(lat, lng)
 
-> Pozwala na pozyskanie pomiarów dla danej lokalizacji. Wyniki pomiarów są sporządzane na podstawie średnich z najbliższych czujników (do 1,5 km od podanego punktu)
+> Zwraca szczegółowe pomiary (obecne, historyczne i przewidywane) dla punktu na mapie, które mogą być interpolowane z najbliższych instalacji
 
 **lat**
 
-Typ: `number`
+Type: `number`
 
 Szerokość geograficzna
 
 **lng**
 
-Typ: `number`
+Type: `number`
 
 Długość geograficzna
+
+### airly.metaIndexes()
+
+> Zwraca listę IndexTypes wspieranych przez platformę
+
+### airly.metaMeasurements()
+
+> Zwraca listę MeasurementTypes wspieranych przez platformę
 
 ## Licencja
 

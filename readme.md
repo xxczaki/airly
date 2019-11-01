@@ -13,9 +13,9 @@
 * Simple, asynchronous API
 * Works in Node.js & the browser
 * Uses the 2.0 version of Airly API
+* Full API coverage
 * Actively maintained
 * Lightweight
-* Single source file (containing ~120 lines of code)
 * Written in TypeScript
 
 ## Install
@@ -38,7 +38,7 @@ const airly = new Airly('API_KEY');
 
 (async () => {
 	try {
-		const data = await airly.idInfo(240);
+		const data = await airly.installationInfo(240);
 		console.log(data);
 	} catch (error) {
 		console.log(error);
@@ -71,9 +71,9 @@ Get air quality descriptions in specified language. Currently supported language
 
 For more information check out [Airly's documentation](https://developer.airly.eu/docs#general.language)
 
-### airly.idData(id)
+### airly.installationMeasurements(id)
 
-> Returns pollution data from the specified installation
+> Returns detailed measurements (current, historical and future) for an installation
 
 **id**
 
@@ -81,9 +81,9 @@ Type: `number`
 
 Unique number of the installation
 
-### airly.idInfo(id)
+### airly.installationInfo(id)
 
-> Returns information about the specified installation
+> Returns information about specified installation
 
 **id**
 
@@ -93,7 +93,7 @@ Unique number of the installation
 
 ### airly.nearestInstallations(lat, lng, maxDistanceKM, maxResults)
 
-> Returns information about 3 nearest installations (including their ID's)
+> Returns information about the nearest installations (including their ID's)
 
 **lat**
 
@@ -104,6 +104,8 @@ Latitude
 **lng**
 
 Type: `number`
+
+Longitude
 
 **maxDistanceKM**
 
@@ -121,9 +123,9 @@ Default: -1
 
 Maximum number of installations to return; negative value means no limit.
 
-### airly.nearestIdMeasurements(lat, lng, maxDistanceKM)
+### airly.nearestMeasurements(lat, lng, maxDistanceKM)
 
-> Returns measurements for an installation closest to a given location.
+> Returns detailed measurements (current, historical and future) from the installation which is closest to a given point
 
 **lat**
 
@@ -145,9 +147,9 @@ Default: 3
 
 All the returned installations must be located within this limit from the given point (in km); negative value means no limit.
 
-### airly.nearestAverageMeasurements(lat, lng)
+### airly.pointMeasurements(lat, lng)
 
-> Returns measurements for any geographical location. Measurement values are interpolated by averaging measurements from nearby sensors (up to 1,5km away from the given point)
+> Returns detailed measurements (current, historical and future) for a map point, which can be interpolated from nearby installations
 
 **lat**
 
@@ -160,6 +162,14 @@ Latitude
 Type: `number`
 
 Longitude
+
+### airly.metaIndexes()
+
+> Returns a list of IndexTypes supported by the platform
+
+### airly.metaMeasurements()
+
+> Returns a list of MeasurementTypes supported by the platform
 
 ## License
 

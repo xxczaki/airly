@@ -1,6 +1,6 @@
 {
 	"name": "airly",
-	"version": "2.0.1",
+	"version": "3.0.0",
 	"description": "Simple wrapper for Airly API, works in Node.js & the browser.",
 	"main": "dist/index.js",
 	"module": "dist/index.esm.js",
@@ -53,8 +53,8 @@
 	"devDependencies": {
 		"@akepinski/tsconfig": "0.0.2",
 		"@types/node-fetch": "^2.5.2",
-		"@typescript-eslint/eslint-plugin": "^2.4.0",
-		"@typescript-eslint/parser": "^2.4.0",
+		"@typescript-eslint/eslint-plugin": "^2.6.0",
+		"@typescript-eslint/parser": "^2.6.0",
 		"cpy-cli": "^2.0.0",
 		"del-cli": "^3.0.0",
 		"eslint-config-xo-typescript": "^0.19.0",

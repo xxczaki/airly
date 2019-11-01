@@ -29,31 +29,11 @@ class Airly {
 	}
 
 	/**
-	* @param {number} id Installation ID - Unique number of the installation
-	* @returns {Promise<object[]>} Data from the installation
-	*/
-	async idData(id: number): Promise<string> {
-		// @ts-ignore
-		const response = await fetch(`${this.baseUrl}/measurements/installation?installationId=${id}`, this.config).then((res: any) => res.json());
-		return response;
-	}
-
-	/**
-	* @param {number} id Installation ID - Unique number of the installation
-	* @returns {Promise<object[]>} Info about installation
-	*/
-	async idInfo(id: number): Promise<string> {
-		// @ts-ignore
-		const response = await fetch(`${this.baseUrl}/installations/${id}`, this.config).then((res: any) => res.json());
-		return response;
-	}
-
-	/**
 	* @param {number} lat Latitude - Geographical coordinate
 	* @param {number} lng Longitude - Geographical coordinate
 	* @param {number} [maxDistanceKM=3] All the returned installations must be located within this limit from the given point (in km); negative value means no limit
 	* @param {number} [maxResults=-1] Maximum number of installations to return; negative value means no limit
-	* @returns {Promise<object[]>} Info about 3 nearest installations
+	* @returns {Promise<object[]>} List of installations given by location point, ordered by distance to that point
 	*/
 	async nearestInstallations(lat: number, lng: number, maxDistanceKM = 3, maxResults = -1): Promise<string> {
 		// @ts-ignore
@@ -62,12 +42,32 @@ class Airly {
 	}
 
 	/**
+	* @param {number} id Installation ID - Unique number of the installation
+	* @returns {Promise<object[]>} Information about specified installation
+	*/
+	async installationInfo(id: number): Promise<string> {
+		// @ts-ignore
+		const response = await fetch(`${this.baseUrl}/installations/${id}`, this.config).then((res: any) => res.json());
+		return response;
+	}
+
+	/**
+	* @param {number} id Installation ID - Unique number of the installation
+	* @returns {Promise<object[]>} Detailed measurements (current, historical and future) for an installation
+	*/
+	async installationMeasurements(id: number): Promise<string> {
+		// @ts-ignore
+		const response = await fetch(`${this.baseUrl}/measurements/installation?installationId=${id}`, this.config).then((res: any) => res.json());
+		return response;
+	}
+
+	/**
 	* @param {number} lat Latitude - Geographical coordinate
 	* @param {number} lng Longitude - Geographical coordinate
 	* @param {number} [maxDistanceKM=3] All the returned installations must be located within this limit from the given point (in km); negative value means no limit
-	* @returns {Promise<object[]>} Measurements for an installation closest to a given location.
+	* @returns {Promise<object[]>} Detailed measurements (current, historical and future) from the installation which is closest to a given point
 	*/
-	async nearestIdMeasurements(lat: number, lng: number, maxDistanceKM = 3): Promise<string> {
+	async nearestMeasurements(lat: number, lng: number, maxDistanceKM = 3): Promise<string> {
 		// @ts-ignore
 		const response = await fetch(`${this.baseUrl}/measurements/nearest?lat=${lat}&lng=${lng}&maxDistanceKM=${maxDistanceKM}`, this.config).then((res: any) => res.json());
 		return response;
@@ -76,11 +76,29 @@ class Airly {
 	/**
 	* @param {number} lat Latitude - Geographical coordinate
 	* @param {number} lng Longitude - Geographical coordinate
-	* @returns {Promise<object[]>} Measurements for any geographical location. Measurement values are interpolated by averaging measurements from nearby sensors (up to 1,5km away from the given point).
+	* @returns {Promise<object[]>} Detailed measurements (current, historical and future) for a map point, which can be interpolated from nearby installations
 	*/
-	async nearestAverageMeasurements(lat: number, lng: number): Promise<string> {
+	async pointMeasurements(lat: number, lng: number): Promise<string> {
 		// @ts-ignore
 		const response = await fetch(`${this.baseUrl}/measurements/point?lat=${lat}&lng=${lng}`, this.config).then((res: any) => res.json());
+		return response;
+	}
+
+	/**
+	* @returns {Promise<object[]>} List of IndexTypes supported by the platform
+	*/
+	async metaIndexes(): Promise<string> {
+		// @ts-ignore
+		const response = await fetch(`${this.baseUrl}/meta/indexes`, this.config).then((res: any) => res.json());
+		return response;
+	}
+
+	/**
+	* @returns {Promise<object[]>} List of MeasurementTypes supported by the platform
+	*/
+	async metaMeasurements(): Promise<string> {
+		// @ts-ignore
+		const response = await fetch(`${this.baseUrl}/meta/measurements`, this.config).then((res: any) => res.json());
 		return response;
 	}
 }

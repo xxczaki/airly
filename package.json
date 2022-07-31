@@ -48,7 +48,7 @@
 		"npm"
 	],
 	"dependencies": {
-		"node-fetch": "^2.6.0"
+		"node-fetch": "^3.2.10"
 	},
 	"devDependencies": {
 		"@akepinski/tsconfig": "0.0.2",
